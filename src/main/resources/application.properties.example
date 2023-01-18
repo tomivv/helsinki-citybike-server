@@ -1,0 +1,12 @@
+logging.level.org.springframework=ERROR
+
+spring.jpa.hibernate.ddl-auto=none
+
+spring.datasource.platform=postgres
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+spring.servlet.multipart.max-file-size=200MB
+spring.servlet.multipart.max-request-size=200MB
