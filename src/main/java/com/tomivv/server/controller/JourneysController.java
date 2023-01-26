@@ -58,8 +58,11 @@ public class JourneysController {
 				}
 
                 List<CSVRecord> batch = records.subList(i, toIndex);
-                // remove journeys that lasted under 10s or covered distance less than 10m
-                batch.removeIf(r -> Double.parseDouble(r.get(6)) <= 10 || Double.parseDouble(r.get(7)) <= 10);
+				// remove journeys that dont have distance or duration
+                batch.removeIf(r -> r.get(6) == "" || r.get(7) == "");
+                // remove journeys that lasted under 10s or covered distance less than 10m and invalid timestamps
+                batch.removeIf(r -> Double.parseDouble(r.get(6)) <= 10 || Double.parseDouble(r.get(7)) <= 10 || r.get(0).length() < 19 || r.get(1).length() < 19);
+
 				jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 					@Override
 					public void setValues(PreparedStatement ps, int j) throws SQLException {
